@@ -1,0 +1,16 @@
+{
+  "name": "practicedailyjavascript",
+  "version": "1.0.0",
+  "main": "Index.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "node build/src/Index.js",
+    "start": "npm run build && npm run deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^20.12.12"
+  }
+}

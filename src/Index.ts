@@ -1,18 +1,14 @@
-import * as R from 'node:readline';
+const FirstNumber = 3, SecondNumber = 4, ThirdNumber = 1;
 
-const ReadLine = R.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+function LargestAmongThree(firstNum: Number, secondNum: Number, thirdNum: Number): Number {
+    if (firstNum > secondNum && firstNum > thirdNum) {
+        return firstNum;
+    } else if (firstNum < secondNum && secondNum > thirdNum) {
+        return secondNum;
+    } else if (thirdNum > firstNum && thirdNum > secondNum) {
+        return thirdNum
+    }
+}
 
-// How to accept user input from commandline
-ReadLine.question("Enter Your Name?\t", (name) => {
-    ReadLine.question("Enter Your Age?\t", (age) => {
-        const BornYear = new Date().getFullYear() - parseInt(age);
-        
-        console.log("You have entered as " + name);
-        console.log("You were born in " + BornYear);
-
-        ReadLine.close();
-    });
-});
+const LargestNumber: Number = LargestAmongThree(FirstNumber, SecondNumber, ThirdNumber);
+console.log("The largest among three is " + LargestNumber);

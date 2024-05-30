@@ -1,14 +1,15 @@
-const FirstNumber = 3, SecondNumber = 4, ThirdNumber = 1;
+console.clear();
 
-function LargestAmongThree(firstNum: Number, secondNum: Number, thirdNum: Number): Number {
-    if (firstNum > secondNum && firstNum > thirdNum) {
-        return firstNum;
-    } else if (firstNum < secondNum && secondNum > thirdNum) {
-        return secondNum;
-    } else if (thirdNum > firstNum && thirdNum > secondNum) {
-        return thirdNum
-    }
+import * as Readline from 'node:readline';
+
+const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
+
+RL.question('Enter Your Number\t', (number) => {
+    console.log("You have entered : \t" + number);
+    checkParity(parseInt(number));
+    RL.close();
+})
+
+function checkParity(num: number): void {
+    console.log(num + " is an " + (num % 2 == 0 ? "EVEN" : "ODD") + " number");
 }
-
-const LargestNumber: Number = LargestAmongThree(FirstNumber, SecondNumber, ThirdNumber);
-console.log("The largest among three is " + LargestNumber);

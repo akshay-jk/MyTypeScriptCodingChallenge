@@ -1,15 +1,29 @@
+//Clearing the CommandLine/Terminal
 console.clear();
 
 import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-RL.question('Enter Your Number\t', (number) => {
-    console.log("You have entered : \t" + number);
-    checkParity(parseInt(number));
+//Reading input from CommandLine/Terminal
+RL.question('Enter Your Number\t', (num) => {
+    //Printing user input to CommandLine/Terminal
+    console.log("You have entered:\t" + num);
+
+    //Calling the function with user input;
+    console.log(num + " is " + (isPrimeNumber(parseInt(num)) ? "a" : "not") + " prime number");
+
+    //Giving the control back to CommandLine/Terminal
     RL.close();
 })
 
-function checkParity(num: number): void {
-    console.log(num + " is an " + (num % 2 == 0 ? "EVEN" : "ODD") + " number");
+//Function which does the logic
+function isPrimeNumber(num: number): boolean {
+    if(num < 1) return false;
+    for (let i = 1; i < num; i++) {
+        if (i != 1 && num % i == 0) {
+            return false;
+        }
+    };
+    return true;
 }

@@ -11,33 +11,31 @@ RL.question('Enter Your Number\t', (num) => {
     console.log("You have entered:\t" + num);
 
     //Calling the function with user input;
-    const FactorialValue01: number = findFactorial(parseInt(num));
-    console.log(FactorialValue01 + " is the factorial of " + num + ". (Normal)");
-
-    //Calling the recursive function with user input;
-    const FactorialValue02: number = findFactorialByRecursion(parseInt(num));
-    console.log(FactorialValue02 + " is the factorial of " + num + ". (Recursion)");
+    console.log(num + " is " + (isNeonNumber(parseInt(num)) ? "a" : "not a") + " neon number");
 
     //Giving the control back to CommandLine/Terminal
     RL.close();
 })
 
 //Function which does the logic
-function findFactorial(num: number): number {
-    // Factorial of 0 and 1 is 1;
-    if (num == 0 || num == 1) return 1;
-
-    //Factorial calculation of numbers greater than 2
-    let factorialNum = 1;
-    for (let i = num; i > 1; --i) factorialNum *= i;
-    return factorialNum;
+function isNeonNumber(num: number): boolean {
+    let userInput: number = num;
+    let squareOfInput = doSquare(userInput);
+    let sumOfDigits = doDigitSum(squareOfInput);
+    if (userInput == sumOfDigits) return true;
+    return false;
 }
 
-//Function which does the logic using recursion
-function findFactorialByRecursion(num: number) {
-    // Factorial of 0 and 1 is 1;
-    if (num == 0 || num == 1) return 1;
+function doSquare(num: number): number {
+    return Math.pow(num, 2);
+}
 
-    //Factorial calculation of numbers greater than 2
-    return num * findFactorialByRecursion(num - 1);
+function doDigitSum(num: number): number {
+    let Inp = num;
+    let digitSum = 0;
+    while (Inp != 0) {
+        digitSum = digitSum + (Inp % 10);
+        Inp = Math.floor(Inp / 10);
+    }
+    return digitSum;
 }

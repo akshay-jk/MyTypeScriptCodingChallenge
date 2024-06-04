@@ -11,31 +11,25 @@ RL.question('Enter Your Number\t', (num) => {
     console.log("You have entered:\t" + num);
 
     //Calling the function with user input;
-    console.log(num + " is " + (isNeonNumber(parseInt(num)) ? "a" : "not a") + " neon number");
+    console.log(num + " is " + (isArmstrongNumber(parseInt(num)) ? "an" : "not an") + " armstrong number");
 
     //Giving the control back to CommandLine/Terminal
     RL.close();
 })
 
 //Function which does the logic
-function isNeonNumber(num: number): boolean {
-    let userInput: number = num;
-    let squareOfInput = doSquare(userInput);
-    let sumOfDigits = doDigitSum(squareOfInput);
-    if (userInput == sumOfDigits) return true;
+function isArmstrongNumber(num: number): boolean {
+    let inputNum = num;
+    let aggregateValue = 0;
+    while (inputNum != 0) {
+        aggregateValue = aggregateValue + (doCube(Math.floor(inputNum % 10)));
+        inputNum = inputNum / 10;
+    }
+
+    if (num == aggregateValue) return true;
     return false;
 }
 
-function doSquare(num: number): number {
-    return Math.pow(num, 2);
-}
-
-function doDigitSum(num: number): number {
-    let Inp = num;
-    let digitSum = 0;
-    while (Inp != 0) {
-        digitSum = digitSum + (Inp % 10);
-        Inp = Math.floor(Inp / 10);
-    }
-    return digitSum;
+function doCube(num: number): number {
+    return Math.pow(num, 3);
 }

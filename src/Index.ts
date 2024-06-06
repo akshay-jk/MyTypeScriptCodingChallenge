@@ -6,24 +6,32 @@ import * as Readline from 'node:readline';
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
 //Reading input from CommandLine/Terminal
-RL.question('Enter the text\t', (text) => {
-    //Printing user input to CommandLine/Terminal
-    console.log("You have entered:\t" + text);
+RL.question('Enter the Principle Amount\t', (amount) => {
 
-    //Calling the function with user input;
-    console.log("The text you have entered is " + (isPalindrome(`${text}`) ? "a" : "not a") + " palindrome")
+    //Reading input from CommandLine/Terminal
+    RL.question('Enter the Rate\t', (rate) => {
 
-    //Giving the control back to CommandLine/Terminal
-    RL.close();
+        //Reading input from CommandLine/Terminal
+        RL.question('Enter the Tenure\t', (tenure) => {
+
+            //Calling the function with user input
+            const SimpleInterest: number = doCalculateSimpleInterest(parseInt(rate))(parseInt(tenure))(parseInt(amount));
+            console.log("-------------------------------------");
+            console.log("Principle Amount : " + amount);
+            console.log("Total Interest : " + SimpleInterest);
+            console.log("Amount to be repaid : " + (parseInt(amount) + SimpleInterest));
+            console.log("-------------------------------------");
+
+            //Giving the control back to CommandLine/Terminal
+            RL.close();
+        })
+    })
 })
 
-//Function which does the logic
-function isPalindrome(str: string): boolean {
-    let reversedString: string = "";
-    let inputCleansed = str.split(" ").join("");
-    for (let i = inputCleansed.length - 1; i > -1; --i) {
-        reversedString += inputCleansed[i];
+function doCalculateSimpleInterest(rate: number) {
+    return function (tenure: number) {
+        return function (amount: number) {
+            return (amount * tenure * rate) / 100;
+        }
     }
-    if (inputCleansed == reversedString) return true;
-    return false;
 }

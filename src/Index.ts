@@ -18,8 +18,15 @@ RL.question('Enter the Principle Amount\t', (amount) => {
             const SimpleInterest: number = doCalculateSimpleInterest(parseInt(rate))(parseInt(tenure))(parseInt(amount));
             console.log("-------------------------------------");
             console.log("Principle Amount : " + amount);
-            console.log("Total Interest : " + SimpleInterest);
+            console.log("Total Interest (Simple): " + SimpleInterest);
             console.log("Amount to be repaid : " + (parseInt(amount) + SimpleInterest));
+            console.log("-------------------------------------");
+
+            const CompoundInterest: number = doCalculateCompoundInterest(parseInt(amount), parseInt(rate), parseInt(tenure));
+            console.log("-------------------------------------");
+            console.log("Principle Amount : " + amount);
+            console.log("Total Interest (Compound) : " + CompoundInterest);
+            console.log("Amount to be repaid : " + (parseInt(amount) + CompoundInterest));
             console.log("-------------------------------------");
 
             //Giving the control back to CommandLine/Terminal
@@ -34,4 +41,8 @@ function doCalculateSimpleInterest(rate: number) {
             return (amount * tenure * rate) / 100;
         }
     }
+}
+
+function doCalculateCompoundInterest(amount: number, rate: number, tenure: number): number {
+    return (amount * (Math.pow((1 + ((rate / 100) / 12)), (12 * tenure)))) - amount;
 }

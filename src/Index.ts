@@ -5,44 +5,31 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-//Reading input from CommandLine/Terminal
-RL.question('Enter the Principle Amount\t', (amount) => {
+//Reading length from CommandLine/Terminal
+RL.question('Enter the length\t', (length) => {
 
-    //Reading input from CommandLine/Terminal
-    RL.question('Enter the Rate\t', (rate) => {
+    //Reading breadth from CommandLine/Terminal
+    RL.question('Enter the breadth\t', (breadth) => {
 
-        //Reading input from CommandLine/Terminal
-        RL.question('Enter the Tenure\t', (tenure) => {
+        //Confirming whether square or rectangle
+        const QuadrilateralName: string = (length == breadth ? "Square" : "Rectangle");
 
-            //Calling the function with user input
-            const SimpleInterest: number = doCalculateSimpleInterest(parseInt(rate))(parseInt(tenure))(parseInt(amount));
-            console.log("-------------------------------------");
-            console.log("Principle Amount : " + amount);
-            console.log("Total Interest (Simple): " + SimpleInterest);
-            console.log("Amount to be repaid : " + (parseInt(amount) + SimpleInterest));
-            console.log("-------------------------------------");
+        //Printing Perimeter
+        console.log("The Perimeter of " + QuadrilateralName + " is " + doCalculatePerimeter(parseInt(length), parseInt(breadth)));
 
-            const CompoundInterest: number = doCalculateCompoundInterest(parseInt(amount), parseInt(rate), parseInt(tenure));
-            console.log("-------------------------------------");
-            console.log("Principle Amount : " + amount);
-            console.log("Total Interest (Compound) : " + CompoundInterest);
-            console.log("Amount to be repaid : " + (parseInt(amount) + CompoundInterest));
-            console.log("-------------------------------------");
+        //Printing Area
+        console.log("The Area of " + QuadrilateralName + " is " + doCalculateArea(parseInt(length), parseInt(breadth)));
 
-            //Giving the control back to CommandLine/Terminal
-            RL.close();
-        })
+        RL.close();
     })
-})
+});
 
-function doCalculateSimpleInterest(rate: number) {
-    return function (tenure: number) {
-        return function (amount: number) {
-            return (amount * tenure * rate) / 100;
-        }
-    }
+// Function that calculates perimter
+function doCalculatePerimeter(length: number, breadth: number): number {
+    return 2 * (length + breadth);
 }
 
-function doCalculateCompoundInterest(amount: number, rate: number, tenure: number): number {
-    return (amount * (Math.pow((1 + ((rate / 100) / 12)), (12 * tenure)))) - amount;
+// Function that calculates area
+function doCalculateArea(length: number, breadth: number): number {
+    return length * breadth;
 }

@@ -2,34 +2,32 @@
 console.clear();
 
 import * as Readline from 'node:readline';
+import { ComplexNumber } from './Entity'
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-//Reading length from CommandLine/Terminal
-RL.question('Enter the length\t', (length) => {
+//Reading real part from CommandLine/Terminal
+RL.question('Enter the real part of first number\t', (RealPartFirstNumber) => {
 
-    //Reading breadth from CommandLine/Terminal
-    RL.question('Enter the breadth\t', (breadth) => {
+    //Reading imaginary part from CommandLine/Terminal
+    RL.question('Enter the imaginary part of first number\t', (ImaginaryPartFirstNumber) => {
 
-        //Confirming whether square or rectangle
-        const QuadrilateralName: string = (length == breadth ? "Square" : "Rectangle");
+        const ComplexNo = new ComplexNumber(parseInt(RealPartFirstNumber), parseInt(ImaginaryPartFirstNumber));
 
-        //Printing Perimeter
-        console.log("The Perimeter of " + QuadrilateralName + " is " + doCalculatePerimeter(parseInt(length), parseInt(breadth)));
+        //Reading real part from CommandLine/Terminal
+        RL.question('Enter the real part of second number\t', (RealPartSecondNumber) => {
 
-        //Printing Area
-        console.log("The Area of " + QuadrilateralName + " is " + doCalculateArea(parseInt(length), parseInt(breadth)));
+            ComplexNo.addRealPart(parseInt(RealPartSecondNumber));
 
-        RL.close();
+            //Reading imaginary from CommandLine/Terminal
+            RL.question('Enter the imaginary part of second number\t', (ImaginaryPartSecondNumber) => {
+
+                ComplexNo.addImaginaryPart(parseInt(ImaginaryPartSecondNumber));
+                ComplexNo.showDetails();
+
+                RL.close();
+            })
+        });
+
     })
 });
-
-// Function that calculates perimter
-function doCalculatePerimeter(length: number, breadth: number): number {
-    return 2 * (length + breadth);
-}
-
-// Function that calculates area
-function doCalculateArea(length: number, breadth: number): number {
-    return length * breadth;
-}

@@ -2,32 +2,29 @@
 console.clear();
 
 import * as Readline from 'node:readline';
-import { ComplexNumber } from './Entity'
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-//Reading real part from CommandLine/Terminal
-RL.question('Enter the real part of first number\t', (RealPartFirstNumber) => {
+//Reading the year from CommandLine/Terminal
+RL.question('Enter the year\t', (year) => {
 
-    //Reading imaginary part from CommandLine/Terminal
-    RL.question('Enter the imaginary part of first number\t', (ImaginaryPartFirstNumber) => {
+    console.log(year + " is " + (checkIsLeapYear(parseInt(year)) ? "a " : "not a ") + "leap year");
 
-        const ComplexNo = new ComplexNumber(parseInt(RealPartFirstNumber), parseInt(ImaginaryPartFirstNumber));
-
-        //Reading real part from CommandLine/Terminal
-        RL.question('Enter the real part of second number\t', (RealPartSecondNumber) => {
-
-            ComplexNo.addRealPart(parseInt(RealPartSecondNumber));
-
-            //Reading imaginary from CommandLine/Terminal
-            RL.question('Enter the imaginary part of second number\t', (ImaginaryPartSecondNumber) => {
-
-                ComplexNo.addImaginaryPart(parseInt(ImaginaryPartSecondNumber));
-                ComplexNo.showDetails();
-
-                RL.close();
-            })
-        });
-
-    })
+    RL.close();
 });
+
+function checkIsLeapYear(year: number): boolean {
+    if (year % 4 == 0) {
+        if (year % 100 == 0) {
+            if (year % 400 == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}

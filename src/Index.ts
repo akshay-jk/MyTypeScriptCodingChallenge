@@ -5,26 +5,18 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-//Reading the year from CommandLine/Terminal
-RL.question('Enter the year\t', (year) => {
+//Reading the character from CommandLine/Terminal
+RL.question('Enter the character\t', (char) => {
 
-    console.log(year + " is " + (checkIsLeapYear(parseInt(year)) ? "a " : "not a ") + "leap year");
+    console.log("Input is a " + (isVowel(char) ? "VOWEL" : "CONSONANT"));
 
     RL.close();
 });
 
-function checkIsLeapYear(year: number): boolean {
-    if (year % 4 == 0) {
-        if (year % 100 == 0) {
-            if (year % 400 == 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
+function isVowel(char: string): boolean {
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    for (let vw of vowels)
+        if (char.toLowerCase() == vw)
             return true;
-        }
-    } else {
-        return false;
-    }
+    return false;
 }

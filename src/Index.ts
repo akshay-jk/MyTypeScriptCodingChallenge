@@ -5,18 +5,24 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
+let FirstVar: number, SecondVar: number;
+
 //Reading the character from CommandLine/Terminal
-RL.question('Enter the character\t', (char) => {
+RL.question('Enter the first number\t', (num1) => {
+    RL.question('Enter the second number\t', (num2) => {
+        FirstVar = parseInt(num1);
+        SecondVar = parseInt(num2);
 
-    console.log("Input is a " + (isVowel(char) ? "VOWEL" : "CONSONANT"));
+        console.log("Before Swapping, A is " + FirstVar + ", B is " + SecondVar);
+        doSwapNumber();
+        console.log("After Swapping, A is " + FirstVar + ", B is " + SecondVar);
 
-    RL.close();
+        RL.close();
+    });
 });
 
-function isVowel(char: string): boolean {
-    const vowels = ['a', 'e', 'i', 'o', 'u'];
-    for (let vw of vowels)
-        if (char.toLowerCase() == vw)
-            return true;
-    return false;
+function doSwapNumber() {
+    let tempVar = FirstVar + SecondVar;
+    FirstVar = tempVar - FirstVar;
+    SecondVar = tempVar - FirstVar;
 }

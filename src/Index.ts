@@ -5,24 +5,17 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-let FirstVar: number, SecondVar: number;
-
 //Reading the character from CommandLine/Terminal
-RL.question('Enter the first number\t', (num1) => {
-    RL.question('Enter the second number\t', (num2) => {
-        FirstVar = parseInt(num1);
-        SecondVar = parseInt(num2);
+RL.question('Enter the limit\t', (limit) => {
 
-        console.log("Before Swapping, A is " + FirstVar + ", B is " + SecondVar);
-        doSwapNumber();
-        console.log("After Swapping, A is " + FirstVar + ", B is " + SecondVar);
-
-        RL.close();
-    });
+    doPrintNaturalNumbers(parseInt(limit));
+    RL.close();
 });
 
-function doSwapNumber() {
-    let tempVar = FirstVar + SecondVar;
-    FirstVar = tempVar - FirstVar;
-    SecondVar = tempVar - FirstVar;
+
+function doPrintNaturalNumbers(limit: number): void {
+    let str: string = '';
+    for (let i = 1; i <= limit; i++)
+        str += `${i} `;
+    console.log(str);
 }

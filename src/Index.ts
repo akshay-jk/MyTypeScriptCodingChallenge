@@ -8,12 +8,11 @@ const RL = Readline.createInterface({ input: process.stdin, output: process.stdo
 //Reading the character from CommandLine/Terminal
 RL.question('Enter the limit\t', (limit) => {
 
-    doPrintNaturalNumbersInAscOrder(parseInt(limit));
+    doPrintNaturalNumbersInDescOrder(parseInt(limit));
     RL.close();
 });
 
-
-function doPrintNaturalNumbersInAscOrder(limit: number): void {
-    if (limit > 1) doPrintNaturalNumbersInAscOrder(limit - 1);
+function doPrintNaturalNumbersInDescOrder(limit: number): void {
     console.log(limit);
+    if (limit > 1) doPrintNaturalNumbersInDescOrder(limit - 1);
 }

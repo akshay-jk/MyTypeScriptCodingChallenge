@@ -6,41 +6,27 @@ import * as Readline from 'node:readline';
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
 //Reading the character from CommandLine/Terminal
-RL.question('Enter the first number\t', (num1) => {
-    RL.question('Enter the second number\t', (num2) => {
-        const FirstNumber: number = parseInt(num1);
-        const SecondNumber: number = parseInt(num2);
+RL.question('Enter the limit\t', (limit) => {
 
-        const HighestCommonFactor: number = findHighestCommonFactor(FirstNumber, SecondNumber);
-        const LowestCommonMultiple: number = findLowestCommonMultiple(FirstNumber, SecondNumber);
+    let FibonacciSeries: Array<Number> = printFibonacciSeries(parseInt(limit));
+    console.log(...FibonacciSeries);
 
-        console.log("The highest common factor is " + HighestCommonFactor);
-        console.log("The lowest common multiple is " + LowestCommonMultiple);
-
-        RL.close();
-    });
+    RL.close();
 });
 
-function findHighestCommonFactor(NumOne: number, NumTwo: number): number {
-    let ExpectedValue: number = Math.min(NumOne, NumTwo);
-    while (ExpectedValue > 0) {
-        if (NumOne % ExpectedValue == 0 && NumTwo % ExpectedValue == 0)
-            break;
-        ExpectedValue--;
+function printFibonacciSeries(limit: number): Array<Number> {
+    let previousValue: number = 0, presentValue: number = 1;
+    let resultantArray: Array<Number> = [];
+    while (resultantArray.length < limit) {
+        if (resultantArray.length == 0) {
+            resultantArray.push(previousValue, presentValue);
+        } else {
+            let nextValue = previousValue + presentValue;
+            resultantArray.push(nextValue);
+            previousValue = presentValue;
+            presentValue = nextValue;
+        }
     }
-    return ExpectedValue;
-}
 
-function findLowestCommonMultiple(NumOne: number, NumTwo: number): number {
-    let ExpectedValue: number = Math.max(NumOne, NumTwo);
-    while (ExpectedValue <= findProduct(NumOne, NumTwo)) {
-        if (ExpectedValue % NumOne == 0 && ExpectedValue % NumTwo == 0)
-            break;
-        ExpectedValue++;
-    }
-    return ExpectedValue;
-}
-
-function findProduct(NumOne: number, NumTwo: number): number {
-    return NumOne * NumTwo;
+    return resultantArray;
 }

@@ -13,7 +13,7 @@ RL.question('Enter the limit\t', (limit) => {
 });
 
 function printRightTriangle(triangleHeight: number): void {
-    for (let i = 0; i < triangleHeight; i++) {
-        console.log("*".repeat(i + 1) + "-".repeat(triangleHeight - (i + 1)));
+    for (let i = 1; i <= triangleHeight; i++) {
+        console.log("- ".repeat(triangleHeight - (i)) + "* ".repeat(i))
     }
 }

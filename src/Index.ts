@@ -5,16 +5,16 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-RL.question('Enter the height of pyramid\t', (height) => {
-    printPyramid(parseInt(height));
+RL.question('Enter the depth of pyramid\t', (depth) => {
+    printInvertedPyramid(parseInt(depth));
     RL.close();
 });
 
-function printPyramid(pyramidHeight: number): void {
-    for (let i = 0; i < pyramidHeight; i++) {
+function printInvertedPyramid(pyramidDepth: number): void {
+    for (let i = 0; i < pyramidDepth; i++) {
         let PyramidLine = "";
 
-        let NumberOfHyphens = pyramidHeight - (i + 1), NumberOfStar = i;
+        let NumberOfHyphens = i, NumberOfStar = pyramidDepth - (i + 1);
 
         PyramidLine += " - ".repeat(NumberOfHyphens);
         PyramidLine += " * ".repeat(NumberOfStar);

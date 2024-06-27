@@ -8,14 +8,14 @@ const RL = Readline.createInterface({ input: process.stdin, output: process.stdo
 RL.question('Enter the height of the triangle\t', (height) => {
 
     const TriangleHeight: number = parseInt(height);
-    PrintInvertedRightAngledLeftSidedTriangle(TriangleHeight);
+    PrintInvertedRightAngledRightSidedTriangle(TriangleHeight);
 
     RL.close();
 });
 
 
-function PrintInvertedRightAngledLeftSidedTriangle(triangleHeight: number): void {
+function PrintInvertedRightAngledRightSidedTriangle(triangleHeight: number): void {
     for (let i = 0; i < triangleHeight; i++) {
-        console.log(" * ".repeat(triangleHeight - (i)) + " - ".repeat((i)));
+        console.log(" - ".repeat(i) + " * ".repeat(triangleHeight - i));
     }
 }

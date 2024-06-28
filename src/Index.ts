@@ -5,17 +5,29 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-RL.question('Enter the height of the triangle\t', (height) => {
+RL.question('Enter the height of pyramid\t', (Height) => {
 
-    const TriangleHeight: number = parseInt(height);
-    PrintInvertedRightAngledRightSidedTriangle(TriangleHeight);
+    const PyramidHeight: number = parseInt(Height);
+    printInvertedPyramidMirror(PyramidHeight);
 
     RL.close();
 });
 
+function printInvertedPyramidMirror(pyramidHeight: number): void {
+    const Height: number = pyramidHeight, Width: number = (Height == 1) ? Height : (2 * Height) - 1;
 
-function PrintInvertedRightAngledRightSidedTriangle(triangleHeight: number): void {
-    for (let i = 0; i < triangleHeight; i++) {
-        console.log(" - ".repeat(i) + " * ".repeat(triangleHeight - i));
+    for (let h = Height; h >= -Height; h--) {
+
+        let DynamicWidth: string = "";
+
+        DynamicWidth += " - ".repeat(Math.ceil(Width / 2) - Math.abs(h));
+        DynamicWidth += " * ".repeat(Math.abs(h));
+
+        DynamicWidth += " * ";
+
+        DynamicWidth += " * ".repeat(Math.abs(h));
+        DynamicWidth += " - ".repeat(Math.ceil(Width / 2) - Math.abs(h));
+
+        console.log(DynamicWidth);
     }
 }

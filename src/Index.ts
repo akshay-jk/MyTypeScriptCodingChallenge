@@ -5,29 +5,28 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-RL.question('Enter the height of pyramid\t', (Height) => {
+RL.question('Enter the size of square\t', (SquareSize) => {
 
-    const PyramidHeight: number = parseInt(Height);
-    printInvertedPyramidMirror(PyramidHeight);
-
+    printSquare(parseInt(SquareSize));
     RL.close();
 });
 
-function printInvertedPyramidMirror(pyramidHeight: number): void {
-    const Height: number = pyramidHeight, Width: number = (Height == 1) ? Height : (2 * Height) - 1;
+function printSquare(size: number): void {
+    const SquareSize: number = size;
 
-    for (let h = Height; h >= -Height; h--) {
-
-        let DynamicWidth: string = "";
-
-        DynamicWidth += " - ".repeat(Math.ceil(Width / 2) - Math.abs(h));
-        DynamicWidth += " * ".repeat(Math.abs(h));
-
-        DynamicWidth += " * ";
-
-        DynamicWidth += " * ".repeat(Math.abs(h));
-        DynamicWidth += " - ".repeat(Math.ceil(Width / 2) - Math.abs(h));
-
-        console.log(DynamicWidth);
+    for (let i = 0; i < SquareSize; i++) {
+        let NewLine: string = "";
+        for (let j = 0; j < SquareSize; j++) {
+            if (i == 0 || i == SquareSize - 1) {
+                NewLine += " * ";
+            } else {
+                NewLine = (j == 0 || j == SquareSize - 1)
+                    ?
+                    NewLine + " * "
+                    :
+                    NewLine + " - ";
+            }
+        }
+        console.log(NewLine);
     }
-}
+};

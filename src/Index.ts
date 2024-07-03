@@ -5,28 +5,26 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-RL.question('Enter the size of square\t', (SquareSize) => {
+RL.question("Enter the array elements followed by space\t", (input) => {
+    const Arr: Array<number> = input.split(' ').map(n => parseInt(n));
 
-    printSquare(parseInt(SquareSize));
-    RL.close();
+    RL.question("Enter the array elements to be searched\t", (key) => {
+        const searchKey: number = parseInt(key);
+
+        LinearSearch(Arr, searchKey);
+
+        RL.close();
+    });
 });
 
-function printSquare(size: number): void {
-    const SquareSize: number = size;
-
-    for (let i = 0; i < SquareSize; i++) {
-        let NewLine: string = "";
-        for (let j = 0; j < SquareSize; j++) {
-            if (i == 0 || i == SquareSize - 1) {
-                NewLine += " * ";
-            } else {
-                NewLine = (j == 0 || j == SquareSize - 1)
-                    ?
-                    NewLine + " * "
-                    :
-                    NewLine + " - ";
-            }
+function LinearSearch(arr: Array<number>, searchKey: number): void {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] == searchKey) {
+            console.log(i + 1);
+            return;
         }
-        console.log(NewLine);
     }
-};
+
+    console.log(searchKey + " is not present");
+
+}

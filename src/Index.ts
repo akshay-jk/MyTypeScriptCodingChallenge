@@ -5,26 +5,32 @@ import * as Readline from 'node:readline';
 
 const RL = Readline.createInterface({ input: process.stdin, output: process.stdout });
 
-RL.question("Enter the array elements followed by space\t", (input) => {
-    const Arr: Array<number> = input.split(' ').map(n => parseInt(n));
+RL.question("Enter the array elements\t", (input) => {
+    const SortedArray: Array<number> = input.split(' ').map(n => parseInt(n));
 
-    RL.question("Enter the array elements to be searched\t", (key) => {
-        const searchKey: number = parseInt(key);
+    RL.question("Enter the search key\t", (key) => {
+        const SearchKey: number = parseInt(key);
 
-        LinearSearch(Arr, searchKey);
+        BinarySearch(SortedArray, SearchKey);
 
         RL.close();
     });
 });
 
-function LinearSearch(arr: Array<number>, searchKey: number): void {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] == searchKey) {
-            console.log(i + 1);
+function BinarySearch(arr: Array<number>, key: number): void {
+    let LowerLimit: number = 0, UpperLimit: number = arr.length - 1;
+    while (LowerLimit != UpperLimit) {
+        let MiddleIndex = Math.floor((UpperLimit + LowerLimit) / 2);
+        if (arr[MiddleIndex] == key) {
+            console.log('Key present at index ' + MiddleIndex);
             return;
+        } else {
+            if (key > arr[MiddleIndex]) {
+                LowerLimit = MiddleIndex + 1;
+            } else {
+                UpperLimit = MiddleIndex - 1;
+            }
         }
     }
-
-    console.log(searchKey + " is not present");
-
+    console.log("Key not present");
 }
